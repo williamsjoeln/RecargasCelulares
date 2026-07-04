@@ -15,10 +15,10 @@ namespace ModeloTelefonos
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            
+
             pictureBox1.BackColor = Color.Transparent;
 
-            
+
             pictureBox1.Parent = this;
         }
 
@@ -44,7 +44,7 @@ namespace ModeloTelefonos
 
         private Boolean validaRegistro()
         {
-            
+
             if (txtNumero.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Debe ingresar un número de teléfono.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -52,7 +52,7 @@ namespace ModeloTelefonos
                 return false;
             }
 
-            
+
             if (cmbMonto.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe seleccionar un monto para la recarga.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -60,21 +60,21 @@ namespace ModeloTelefonos
                 return false;
             }
 
-            
+
             if (rbIlimitada.Checked == false && rbSinPlan.Checked == false)
             {
                 MessageBox.Show("Debe seleccionar un tipo de recarga (Ilimitada o Sin Plan).", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            
+
             if (chkClaro.Checked == false && chkMovistar.Checked == false && chkTuenti.Checked == false)
             {
                 MessageBox.Show("Debe seleccionar una operadora (Claro, Movistar o Tuenti).", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            
+
             return true;
         }
 
@@ -83,42 +83,69 @@ namespace ModeloTelefonos
         {
             if (validaRegistro())
             {
-                
+
                 this.progressBar1.Value = 0;
                 this.btnRecargar.Enabled = false;
 
-                
+
                 this.timer1.Start();
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
             if (this.progressBar1.Value < 100)
             {
                 this.progressBar1.Value += 2;
             }
             else
             {
-               
+
                 this.timer1.Stop();
 
-                
+
                 this.btnRecargar.Enabled = true;
 
                 string TipoRecarga = rbIlimitada.Checked ? "Ilimitada" : "Sin Plan";
                 string Operador = chkClaro.Checked ? "Claro" : chkMovistar.Checked ? "Movistar" : chkTuenti.Checked ? "Tuenti" : "Ninguno";
 
-                
+
                 string mensajeFinal = "¡Tu recarga ha sido exitosa!\n\n" +
                                      $"- Procesando recarga número: {txtNumero.Text}\n" +
                                      $"- Monto: {cmbMonto.SelectedItem}\n" +
                                      $"- Tipo de Recarga: {TipoRecarga}\n" +
                                      $"- Operador: {Operador}";
 
-               
+
                 MessageBox.Show(mensajeFinal, "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void chkClaro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkClaro.Checked)
+            {
+                chkMovistar.Checked = false;
+                chkTuenti.Checked = false;
+            }
+        }
+
+        private void chkMovistar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMovistar.Checked)
+            {
+                chkClaro.Checked = false;
+                chkTuenti.Checked = false;
+            }
+        }
+
+        private void chkTuenti_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTuenti.Checked)
+            {
+                chkClaro.Checked = false;
+                chkMovistar.Checked = false;
             }
         }
     }

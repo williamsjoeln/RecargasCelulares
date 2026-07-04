@@ -152,6 +152,7 @@
             chkClaro.TabIndex = 11;
             chkClaro.Text = "CLARO";
             chkClaro.UseVisualStyleBackColor = true;
+            chkClaro.CheckedChanged += chkClaro_CheckedChanged;
             // 
             // chkTuenti
             // 
@@ -162,6 +163,7 @@
             chkTuenti.TabIndex = 12;
             chkTuenti.Text = "TUENTI";
             chkTuenti.UseVisualStyleBackColor = true;
+            chkTuenti.CheckedChanged += chkTuenti_CheckedChanged;
             // 
             // chkMovistar
             // 
@@ -172,6 +174,7 @@
             chkMovistar.TabIndex = 13;
             chkMovistar.Text = "MOVISTAR";
             chkMovistar.UseVisualStyleBackColor = true;
+            chkMovistar.CheckedChanged += chkMovistar_CheckedChanged;
             // 
             // pictureBox1
             // 
